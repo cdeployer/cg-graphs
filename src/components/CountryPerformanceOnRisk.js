@@ -5,6 +5,7 @@ import Select from 'react-select';
 import update from 'react/lib/update'
 import Highlighter from 'react-highlight-words'
 import 'react-select/dist/react-select.css';
+import '../components/AnnotationsFilter.js'
 import {
   countryIsSelected, fetchDataIfNeeded,
   getCountryRanking , changeMeasure
@@ -14,44 +15,50 @@ import {
 export class CountryPerformanceOnRisk extends Component {
   constructor(props) {
     super(props)
-    let annotation_dates = [];
-    let annotation_notes = [];
-    let annotations = [];
-    fetch(`/static/scripts/publicAnnotation.json`)
-    .then( (response) => {
-        return response.json()
-    })
-    .then( (annData) => {
-      console.log (annData);
-        for (var ann_num in annData.notes){
-          console.log(props.view);
-          if (annData.notes[ann_num].risk_id == props.view.risk){
-              console.log(ann_num);
-              console.log(annData.notes[ann_num].annotation_date);
-              annotation_dates.push(annData.notes[ann_num].annotation_date);
-              annotation_notes.push(annData.notes[ann_num].annotation_date + '\n' + annData.notes[ann_num].annotation);
-              annotations.push ({
-                type: 'date',
-                x: annData.notes[ann_num].annotation_date,
-                y:0,
-                xref: 'x',
-                yref: 'y',
-                align: 'middle',
-                valign: 'center',
-                text: '',
-                borderwidth: 0,
-                showarrow: true,
-                arrowsize:0,
-                arrowwidth: 1,
-                arrowcolor: '#FC9F5B',
-                arrowhead: 6,
-                opacity: 0.8,
-                ax: 0,
-                ay:-200,
-              });
-            }
-        }
-    });
+    //idea on calling AnnotationFilter
+    function filterAnnotation(props) {
+      return (this.props.annotationCountryComparisonFilter);
+    };
+
+    //Working
+    // let annotation_dates = [];
+    // let annotation_notes = [];
+    // let annotations = [];
+    // fetch(`/static/scripts/publicAnnotation.json`)
+    // .then( (response) => {
+    //     return response.json()
+    // })
+    // .then( (annData) => {
+    //   console.log (annData);
+    //     for (var ann_num in annData.notes){
+    //       console.log(props.view);
+    //       if (annData.notes[ann_num].risk_id == props.view.risk){
+    //           console.log(ann_num);
+    //           console.log(annData.notes[ann_num].annotation_date);
+    //           annotation_dates.push(annData.notes[ann_num].annotation_date);
+    //           annotation_notes.push(annData.notes[ann_num].annotation_date + '\n' + annData.notes[ann_num].annotation);
+    //           annotations.push ({
+    //             type: 'date',
+    //             x: annData.notes[ann_num].annotation_date,
+    //             y:0,
+    //             xref: 'x',
+    //             yref: 'y',
+    //             align: 'middle',
+    //             valign: 'center',
+    //             text: '',
+    //             borderwidth: 0,
+    //             showarrow: true,
+    //             arrowsize:0,
+    //             arrowwidth: 1,
+    //             arrowcolor: '#FC9F5B',
+    //             arrowhead: 6,
+    //             opacity: 0.8,
+    //             ax: 0,
+    //             ay:-200,
+    //           });
+    //         }
+    //     }
+    // });
 
     this.state = {
       cubeByRiskByCountry: {},
