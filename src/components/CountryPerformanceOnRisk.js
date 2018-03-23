@@ -262,19 +262,12 @@ export class CountryPerformanceOnRisk extends Component {
         break;
         case 'annotations_off':
           var newState = update(this.state, {
-            graphOptions: {}
-
           });
-          var annotations = update(this.state.plotlyData, {annotations: false});
-          this.setState(newState, annotations);
+          this.setState(newState);
           break;
           case 'archived_on':
             var newState = update(this.state, {
-              graphOptions: {
-
-              }
-
-            });
+              });
             this.setState(newState);
             break;
       default:
@@ -287,9 +280,7 @@ export class CountryPerformanceOnRisk extends Component {
             }
           }
         });
-        var annotations = update(this.state.plotlyData, {annotations: true});
-        this.setState(newState, annotations);
-console.log(annotations + "annotations are true");
+        this.setState(newState);
     }
     this.props.dispatch(changeMeasure(
       changeEvent.target.value,
@@ -398,7 +389,7 @@ console.log(annotations + "annotations are true");
       this.buttonChange.bind(this)
       }
       />
-  Include Archived Data <
+     Include Archived Data <
       /label>
       <
       label className = "checkbox-inline" >
@@ -414,7 +405,7 @@ console.log(annotations + "annotations are true");
       this.buttonChange.bind(this)
     }
     />
-  Turn Annotations Off<
+  Turn Annotations Off <
       /label>
 
 
